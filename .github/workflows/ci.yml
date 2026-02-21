@@ -21,7 +21,7 @@ jobs:
     - name: Install FFmpeg
       run: |
         sudo apt update
-        sudo apt install -y ffmpeg
+        sudo apt install -y ffmpeg lsof
 
     - name: Install dependencies
       run: |

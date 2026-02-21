@@ -18,7 +18,7 @@ jobs:
       with:
         python-version: '3.9'
 
-    - name: Install FFmpeg
+    - name: Install FFmpeg and lsof
       run: |
         sudo apt update
         sudo apt install -y ffmpeg lsof
@@ -29,11 +29,19 @@ jobs:
         pip install -r requirements.txt
         pip install pytest httpx
 
-    - name: Kill processes using port 8000
+    - name: Check processes on port 8000
+      run: |
+        echo "Checking for processes using port 8000"
+        sudo lsof -i:8000
+
+    - name: Kill processes using port 8000 if any
       run: |
         PIDS=$(sudo lsof -t -i:8000)
         if [ ! -z "$PIDS" ]; then
+          echo "Killing processes on port 8000"
           sudo kill -9 $PIDS
+        else
+          echo "No processes found on port 8000"
         fi
 
     - name: Start FastAPI server

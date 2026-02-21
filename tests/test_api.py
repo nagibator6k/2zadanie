@@ -21,7 +21,7 @@ def start_server():
     server_thread.daemon = True
     server_thread.start()
 
-    time.sleep(2)
+    time.sleep(7)
 
     yield
 

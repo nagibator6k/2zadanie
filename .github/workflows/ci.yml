@@ -31,7 +31,10 @@ jobs:
 
     - name: Kill processes using port 8000
       run: |
-        sudo lsof -t -i:8000 | xargs kill -9
+        PIDS=$(sudo lsof -t -i:8000)
+        if [ ! -z "$PIDS" ]; then
+          sudo kill -9 $PIDS
+        fi
 
     - name: Start FastAPI server
       run: |

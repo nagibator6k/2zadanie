@@ -31,9 +31,7 @@ jobs:
 
     - name: Start FastAPI server
       run: |
-        # Запускаем сервер в фоновом режиме с помощью screen, чтобы процесс не завершался сразу
         screen -dm uvicorn 1.main:app --host 127.0.0.1 --port 8000
-        # Ожидаем 5 секунд, чтобы сервер успел стартовать
         sleep 5
 
     - name: Run tests

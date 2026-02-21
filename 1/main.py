@@ -5,6 +5,10 @@ app = FastAPI()
 
 model = whisper.load_model("small")
 
+@app.get("/")
+def read_root():
+    return {"message": "Hello, world!"}
+
 @app.post("/transcribe")
 async def transcribe(file: UploadFile):
     with open("audio.wav", "wb") as f:
